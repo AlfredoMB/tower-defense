@@ -1,15 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
-using AlfredoMB.PrefabPool;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Tower {
-	public class TowerView : View {
+namespace AlfredoMB.Tower
+{
+    public class TowerView : MonoBehaviour, IView
+    {
 		public TowerModel Model { get; set; }
 		public TowerController Controller { get; set; }
 
-		private void Update() {
-
+		private void Update()
+        {
 		}
 	}
 }

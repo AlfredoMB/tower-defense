@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	[CreateAssetMenu]
-	public class BulletModel : Model {
+namespace AlfredoMB.Ship
+{
+    [CreateAssetMenu]
+	public class BulletModel : ScriptableObject, IModel
+    {
 		public float Damage;
 		public float Mass;
 	}

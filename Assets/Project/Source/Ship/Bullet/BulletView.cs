@@ -1,13 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.PrefabPool;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class BulletView : View {
+namespace AlfredoMB.Ship
+{
+    public class BulletView : MonoBehaviour, IView
+    {
 		public BulletController Controller;
 
-		private void OnTriggerEnter() {
+		private void OnTriggerEnter()
+        {
 			PrefabPoolController.ReturnInstance(gameObject);
 		}
 	}

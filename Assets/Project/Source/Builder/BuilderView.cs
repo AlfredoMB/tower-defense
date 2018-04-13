@@ -1,10 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.PrefabPool;
+using UnityEngine;
 
-namespace AlfredoMB.Builder {
-	public class BuilderView : View {
+namespace AlfredoMB.Builder
+{
+    public class BuilderView : MonoBehaviour, IView
+    {
 		public BuilderModel Model { get; set; }
 		public BuilderController Controller { get; set; }
 
@@ -17,14 +18,16 @@ namespace AlfredoMB.Builder {
 		public Vector3 CurrentTileNW;
 		public Vector3 CurrentTileSW;
 
-		private Renderer[] m_meshRenderers;
+		private Renderer[] _meshRenderers;
 
 
-		private void Start() {
-			m_meshRenderers = Reference.GetComponentsInChildren<Renderer> ();
+		private void Start()
+        {
+			_meshRenderers = Reference.GetComponentsInChildren<Renderer> ();
 		}
 
-		private void Update() {
+		private void Update()
+        {
 			Vector3 mousePosition = Camera.main.ScreenToWorldPoint (UnityEngine.Input.mousePosition);
 			mousePosition.y = 0;
 
@@ -52,14 +55,17 @@ namespace AlfredoMB.Builder {
 			SetColor ((ReadyToBuild) ? Color.green : Color.red);
 		}
 
-		private void SetColor(Color p_color) {
-			foreach(MeshRenderer renderer in m_meshRenderers) {
-				renderer.material.color = p_color;
+		private void SetColor(Color color)
+        {
+			foreach(MeshRenderer renderer in _meshRenderers)
+            {
+				renderer.material.color = color;
 			}
 		}
 
-		public void Build(GameObject p_prefab) {
-			GameObject newTower = PrefabPoolController.GetInstance(p_prefab.gameObject);
+		public void Build(GameObject prefab)
+        {
+			GameObject newTower = PrefabPoolController.GetInstance(prefab.gameObject);
 			newTower.transform.position = Reference.transform.position;
 		}
 	}

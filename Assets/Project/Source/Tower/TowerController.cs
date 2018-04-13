@@ -1,16 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
-using System.Collections.Generic;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.Tower.Turret;
+using UnityEngine;
 
-namespace AlfredoMB.Tower {
-	public class TowerController : Controller {
+namespace AlfredoMB.Tower
+{
+    public class TowerController : MonoBehaviour, IController
+    {
 		public TowerModel Model;
 
 		public TurretController Turret;
 
-		private void Awake() {
+		private void Awake()
+        {
 			Turret.Model = Model.Turret;
 		}
 	}

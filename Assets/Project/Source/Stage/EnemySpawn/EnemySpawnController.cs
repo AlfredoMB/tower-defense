@@ -1,43 +1,51 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace AlfredoMB.Stage.EnemySpawn {
-	public class EnemySpawnController : Controller {
+namespace AlfredoMB.Stage.EnemySpawn
+{
+    public class EnemySpawnController : MonoBehaviour, IController
+    {
 		public EnemySpawnView View;
 
 		public Transform Destination;
 
-		private float m_time;
-		private List<SpawnModel> m_spawnList;
+		private float _time;
+		private List<SpawnModel> _spawnList;
 
 		private EnemySpawnModel m_model;
-		public EnemySpawnModel Model { 
-			get {
+		public EnemySpawnModel Model
+        { 
+			get
+            {
 				return m_model;
 			}
 
-			set {
+			set
+            {
 				m_model = value;
-				m_time = 0;
-				m_spawnList = new List<SpawnModel> (Model.SpawnList);
+				_time = 0;
+				_spawnList = new List<SpawnModel> (Model.SpawnList);
 			}
 		}
 
 
-		private void Update() {
-			m_time += Time.deltaTime;
+		private void Update()
+        {
+			_time += Time.deltaTime;
 
-			foreach(SpawnModel spawn in m_spawnList) {
-				if (spawn.Time <= m_time) {
+			foreach(SpawnModel spawn in _spawnList)
+            {
+				if (spawn.Time <= _time)
+                {
 					StageController.Instance.OnShipSpawned ();
 					View.Spawn(spawn, Destination);
 				}
 			}
-			m_spawnList.RemoveAll (item => item.Time <= m_time);
+			_spawnList.RemoveAll (item => item.Time <= _time);
 
-			if (m_spawnList.Count <= 0) {
+			if (_spawnList.Count <= 0)
+            {
 				StageController.Instance.AllEnemiesSpawned ();
 			}
 		}

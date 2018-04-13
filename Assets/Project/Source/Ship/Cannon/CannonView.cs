@@ -1,17 +1,18 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.PrefabPool;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class CannonView : View {
-
-		public void FireBullet(BulletController p_bulletPrefab, Vector3 p_shootForceVector) {
-			BulletController bullet = PrefabPoolController.GetInstance(p_bulletPrefab.gameObject).GetComponent<BulletController>();
+namespace AlfredoMB.Ship
+{
+    public class CannonView : MonoBehaviour, IView
+    {
+		public void FireBullet(BulletController bulletPrefab, Vector3 shootForceVector)
+        {
+			BulletController bullet = PrefabPoolController.GetInstance(bulletPrefab.gameObject).GetComponent<BulletController>();
 			bullet.transform.position = transform.position;
 			bullet.transform.rotation = transform.rotation;
 
-			bullet.FireTowards (p_shootForceVector);
+			bullet.FireTowards (shootForceVector);
 		}
 	}
 }

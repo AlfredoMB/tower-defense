@@ -1,38 +1,44 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
-using AlfredoMB.Stage.Session;
-using AlfredoMB.Stage;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.PrefabPool;
+using AlfredoMB.Stage;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class ArmorController : Controller, IResetable {
+namespace AlfredoMB.Ship
+{
+    public class ArmorController : MonoBehaviour, IController, IResetable
+    {
 		public ArmorView View;
 
-		private ArmorModel m_thisModel;
+		private ArmorModel _thisModel;
 
-		private ArmorModel m_model;
-		public ArmorModel Model {
-			get {
-				return m_model;
+		private ArmorModel _model;
+		public ArmorModel Model
+        {
+			get
+            {
+				return _model;
 			}
-			set {
-				m_model = value;
-				m_thisModel = Object.Instantiate (m_model);
+			set
+            {
+				_model = value;
+				_thisModel = Object.Instantiate (_model);
 			}
 		}
 
 		public ShipModel ShipModel { get; set; }
 
 
-		public void OnBulletHit(BulletView p_bullet) {
-			TakeDamage (p_bullet.Controller.Model.Damage);
+		public void OnBulletHit(BulletView bullet)
+        {
+			TakeDamage (bullet.Controller.Model.Damage);
 		}
 
-		public void TakeDamage(float p_damage) {
-			m_thisModel.HitPoints -= p_damage;
+		public void TakeDamage(float damage)
+        {
+			_thisModel.HitPoints -= damage;
 
-			if (m_thisModel.HitPoints <= 0) {
+			if (_thisModel.HitPoints <= 0)
+            {
 				StageController.Instance.OnShipDestroyed (ShipModel);
 				View.Die ();
 			}
@@ -40,8 +46,9 @@ namespace AlfredoMB.Ship {
 
 		#region IResetable implementation
 
-		public void Reset () {
-			m_thisModel = Object.Instantiate (m_model);
+		public void Reset ()
+        {
+			_thisModel = Object.Instantiate (_model);
 		}
 
 		#endregion

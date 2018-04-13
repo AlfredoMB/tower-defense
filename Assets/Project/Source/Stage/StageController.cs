@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 using AlfredoMB.MVC;
-using System.Collections.Generic;
 using AlfredoMB.Stage.EnemySpawn;
 using AlfredoMB.Ship;
 using AlfredoMB.Stage.Session;
-using UnityEngine.SceneManagement;
 
-namespace AlfredoMB.Stage {
-	public class StageController : Controller {
+namespace AlfredoMB.Stage
+{
+    public class StageController : MonoBehaviour, IController
+    {
 		public static StageController Instance;
 
 		public StageModel Model;
@@ -18,37 +17,43 @@ namespace AlfredoMB.Stage {
 
 		public LifeLossView LifeLoss;
 
-		private int m_enemiesSpawned;
+		private int _enemiesSpawned;
 
-		private bool m_allEnemiesSpawned;
+		private bool _allEnemiesSpawned;
 
 		public bool IsGameOver { get { return SessionController.Instance.Model.Lives <= 0; } }
-		public bool IsVictory { get { return m_allEnemiesSpawned && m_enemiesSpawned <= 0; } }
+		public bool IsVictory { get { return _allEnemiesSpawned && _enemiesSpawned <= 0; } }
 
 
-		private void Awake() {
+		private void Awake()
+        {
 			Instance = this;
 		}
 
-		private void Start() {
+		private void Start()
+        {
 			EnemySpawn.Model = Model.EnemySpawn;
 		}
 
-		public void OnEnemyPassed() {
+		public void OnEnemyPassed()
+        {
 			SessionController.Instance.Model.Lives--;
 		}
 
-		public void OnShipDestroyed(ShipModel p_destroyedShip) {
+		public void OnShipDestroyed(ShipModel p_destroyedShip)
+        {
 			SessionController.Instance.Model.Money += p_destroyedShip.ScoreValue;
-			m_enemiesSpawned--;
+			_enemiesSpawned--;
 		}
 
-		public void OnShipSpawned() {
-			m_enemiesSpawned++;
+		public void OnShipSpawned()
+        {
+			_enemiesSpawned++;
 		}
 
-		public void AllEnemiesSpawned() {
-			m_allEnemiesSpawned = true;
+		public void AllEnemiesSpawned()
+        {
+			_allEnemiesSpawned = true;
 		}
 	}
 }

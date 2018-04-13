@@ -1,16 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
-using AlfredoMB.Ship;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.PrefabPool;
+using AlfredoMB.Ship;
+using UnityEngine;
 
-namespace AlfredoMB.Stage.EnemySpawn {
-	public class EnemySpawnView : View {
-
-		public void Spawn(SpawnModel p_spawnModel, Transform p_destination) {
-			ShipController newEnemy = PrefabPoolController.GetInstance(p_spawnModel.Ship.gameObject).GetComponent<ShipController>();
+namespace AlfredoMB.Stage.EnemySpawn
+{
+    public class EnemySpawnView : MonoBehaviour, IView
+    {
+		public void Spawn(SpawnModel spawnModel, Transform destination)
+        {
+			ShipController newEnemy = PrefabPoolController.GetInstance(spawnModel.Ship.gameObject).GetComponent<ShipController>();
 			newEnemy.transform.position = transform.position;
-			newEnemy.MoveTo (p_destination.position);
+			newEnemy.MoveTo (destination.position);
 		}
 	}
 }

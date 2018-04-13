@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	[CreateAssetMenu]
-	public class FlightControlModel : Model {
+namespace AlfredoMB.Ship
+{
+    [CreateAssetMenu]
+	public class FlightControlModel : ScriptableObject, IModel
+    {
 		public float Speed;
 		public float RotationSpeed;
 	}

@@ -1,14 +1,16 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class PathFindingController : Controller {
+namespace AlfredoMB.Ship
+{
+    public class PathFindingController : MonoBehaviour, IController
+    {
 		public Transform Start;
 		public Transform End;
 
-		private void LateUpdate() {
+		private void LateUpdate()
+        {
 			//Pathfinder.Instance.InsertInQueue(Start.transform.position, End.transform.position, CheckRoute);
 		}
 

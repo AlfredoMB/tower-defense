@@ -1,25 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class BulletController : Controller {
+namespace AlfredoMB.Ship
+{
+    public class BulletController : MonoBehaviour, IController
+    {
 		public BulletModel Model;
 
-		private Rigidbody m_rigidBody; 
-		private Vector3 m_direction;
+		private Rigidbody _rigidBody; 
+		private Vector3 _direction;
 
 
-		private void Start() {
-			m_rigidBody = GetComponent<Rigidbody> ();
+		private void Start()
+        {
+			_rigidBody = GetComponent<Rigidbody> ();
 		}
 
-		public void FireTowards(Vector3 p_direction) {
-			m_direction = p_direction;
+		public void FireTowards(Vector3 direction)
+        {
+			_direction = direction;
 		}
 
-		private void Update() {
-			m_rigidBody.MovePosition(transform.position + m_direction * Time.deltaTime);
+		private void Update()
+        {
+			_rigidBody.MovePosition(transform.position + _direction * Time.deltaTime);
 
 			float cameraDistance = Camera.main.transform.position.y - transform.position.y;
 
@@ -27,7 +31,8 @@ namespace AlfredoMB.Ship {
 			Vector3 bottomRight = Camera.main.ScreenToWorldPoint (new Vector3(Camera.main.pixelWidth, 0, cameraDistance));
 
 			if (transform.position.x < topLeft.x - 5f || transform.position.x > bottomRight.x + 5f || 
-				transform.position.z < bottomRight.z - 5f || transform.position.z > topLeft.z + 5f	) {
+				transform.position.z < bottomRight.z - 5f || transform.position.z > topLeft.z + 5f	)
+            {
 				Destroy (gameObject);
 			}
 		}

@@ -1,45 +1,50 @@
 ﻿using UnityEngine;
-using System.Collections;
 using AlfredoMB.MVC;
-using AlfredoMB.PrefabPool;
 using AlfredoMB.Ship;
 
-namespace AlfredoMB.Tower.Turret {
-	public class TurretView : View {
-
+namespace AlfredoMB.Tower.Turret
+{
+    public class TurretView : MonoBehaviour, IView
+    {
 		public Transform ActionRadius;
 
-		private TurretModel m_model;
-		public TurretModel Model { 
-			get { 
-				return m_model;
+		private TurretModel _model;
+		public TurretModel Model
+        { 
+			get
+            { 
+				return _model;
 			} 
-			set {
-				m_model = value;
+			set
+            {
+				_model = value;
 				UpdateActionRadius ();
 			}
 		}
 		public TurretController Controller { get; set; }
 
 
-		private void UpdateActionRadius() {
+		private void UpdateActionRadius()
+        {
 			ActionRadius.localScale = Vector3.one * Model.ActionRadius;
 		}
 
-		private void OnTriggerEnter(Collider p_collider) {
-			ShipView ship = p_collider.gameObject.GetComponent<ShipView> ();
-			if (ship != null) {
+		private void OnTriggerEnter(Collider collider)
+        {
+			ShipView ship = collider.gameObject.GetComponent<ShipView> ();
+			if (ship != null)
+            {
 				Controller.AddEnemy (ship);
 			}
 		}
 
-		private void OnTriggerExit(Collider p_collider) {
-			ShipView ship = p_collider.gameObject.GetComponent<ShipView> ();
-			if (ship != null) {
+		private void OnTriggerExit(Collider collider)
+        {
+			ShipView ship = collider.gameObject.GetComponent<ShipView> ();
+			if (ship != null)
+            {
 				Controller.RemoveEnemy (ship);
 			}
 		}
-
-
 	}
 }

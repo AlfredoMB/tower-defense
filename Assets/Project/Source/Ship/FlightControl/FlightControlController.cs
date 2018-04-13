@@ -1,25 +1,30 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class FlightControlController : Controller {
-		private FlightControlModel m_model;
-		public FlightControlModel Model {
-			get {
-				return m_model;
+namespace AlfredoMB.Ship
+{
+    public class FlightControlController : MonoBehaviour, IController
+    {
+		private FlightControlModel _model;
+		public FlightControlModel Model
+        {
+			get
+            {
+				return _model;
 			}
-			set {
-				m_model = value;
-				View.Model = m_model;
+			set
+            {
+				_model = value;
+				View.Model = _model;
 			}
 		}
 
 		public PathFindingFlightControlView View;
 
 
-		public void MoveTo(Vector3 p_position) {
-			View.MoveTo (p_position);
+		public void MoveTo(Vector3 position)
+        {
+			View.MoveTo (position);
 		}
 	}
 }

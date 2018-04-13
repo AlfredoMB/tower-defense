@@ -1,25 +1,28 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
-using AlfredoMB.Ship;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.UI;
+using UnityEngine;
 
-namespace AlfredoMB.Stage.Session {
-	public class SessionView : View {
+namespace AlfredoMB.Stage.Session
+{
+    public class SessionView : MonoBehaviour, IView
+    {
 		public ScoreView Money;
 		public ScoreView Lives;
 
-		private SessionModel m_model;
-		public SessionModel Model { 
-			get {
-				return m_model;
+		private SessionModel _model;
+		public SessionModel Model
+        { 
+			get
+            {
+				return _model;
 			}
 
-			set {
-				m_model = value;
+			set
+            {
+				_model = value;
 
-				Money.Model = m_model;
-				Lives.Model = m_model;
+				Money.Model = _model;
+				Lives.Model = _model;
 			}
 		}
 	}

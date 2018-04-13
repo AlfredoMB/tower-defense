@@ -1,40 +1,48 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-    public class PathFindingFlightControlView : View {
+namespace AlfredoMB.Ship
+{
+    public class PathFindingFlightControlView : MonoBehaviour, IView
+    {
 		public FlightControlModel Model { get; set; }
 		
-		private Pathfinding m_pathFinding;
-		private Rigidbody m_rigidbody;
+		private Pathfinding _pathFinding;
+		private Rigidbody _rigidbody;
 
 		private Vector3 m_targetPosition;
 
 
-		private void Awake() {
-			m_pathFinding = GetComponent<Pathfinding>();
-			m_rigidbody = GetComponent<Rigidbody> ();
+		private void Awake()
+        {
+			_pathFinding = GetComponent<Pathfinding>();
+			_rigidbody = GetComponent<Rigidbody> ();
 		}
 
-		public void MoveTo(Vector3 p_position) {
-			m_targetPosition = p_position;
+		public void MoveTo(Vector3 position)
+        {
+			m_targetPosition = position;
 		}
 
-		private void Update() {
-			m_pathFinding.FindPath(transform.position, m_targetPosition);
+		private void Update()
+        {
+			_pathFinding.FindPath(transform.position, m_targetPosition);
 
 			float directionMagnitude = Model.Speed * Time.deltaTime;
 			float pathTrackMagnitude = 0;
 			Vector3 finalPosition = transform.position;
 
-			foreach(Vector3 pathTrack in m_pathFinding.Path) {
+			foreach(Vector3 pathTrack in _pathFinding.Path)
+            {
 				pathTrackMagnitude = pathTrack.magnitude;
 
-				if (pathTrackMagnitude < directionMagnitude) {
+				if (pathTrackMagnitude < directionMagnitude)
+                {
 					directionMagnitude -= pathTrackMagnitude;
 					finalPosition += (pathTrack - finalPosition);
-				} else {
+				}
+                else
+                {
 					finalPosition += (pathTrack - finalPosition).normalized * directionMagnitude;
 					break;
 				}
@@ -43,7 +51,7 @@ namespace AlfredoMB.Ship {
 			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.LookRotation (finalPosition - transform.position), Time.deltaTime * Model.RotationSpeed);
 
 			//transform.position = finalPosition;
-			m_rigidbody.MovePosition (finalPosition);
+			_rigidbody.MovePosition (finalPosition);
         }
     }
 }

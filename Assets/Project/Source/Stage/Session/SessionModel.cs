@@ -1,13 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using AlfredoMB.MVC;
-using AlfredoMB.Ship;
-using System;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Stage.Session {
-	[CreateAssetMenu]
-	public class SessionModel : Model {
+namespace AlfredoMB.Stage.Session
+{
+    [CreateAssetMenu]
+	public class SessionModel : ScriptableObject, IModel
+    {
 		public int Money;
 		public int Lives;
 	}

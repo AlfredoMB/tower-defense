@@ -1,22 +1,23 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
-using System.Collections.Generic;
-using AlfredoMB.Ship;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Stage.Session {
-	public class SessionController : Controller {
+namespace AlfredoMB.Stage.Session
+{
+    public class SessionController : MonoBehaviour, IController
+    {
 		public static SessionController Instance;
 
 		public SessionModel Model;
 		public SessionView View;
 
 
-		private void Awake() {
+		private void Awake()
+        {
 			Instance = this;
 		}
 
-		private void Start() {
+		private void Start()
+        {
 			Model.Money = StageController.Instance.Model.StartingMoney;
 			Model.Lives = StageController.Instance.Model.StartingLives;
 

@@ -1,13 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.PrefabPool;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class ShipView : View {	
+namespace AlfredoMB.Ship
+{
+    public class ShipView : MonoBehaviour, IView
+    {	
 		public float DistanceFromEdges = 50f;
 			
-		private void Update() {
+		private void Update()
+        {
 			float cameraDistance = Camera.main.transform.position.y - transform.position.y;
 
 			Vector3 topLeft = Camera.main.ScreenToWorldPoint (new Vector3 (0, Camera.main.pixelHeight, cameraDistance));
@@ -16,8 +18,8 @@ namespace AlfredoMB.Ship {
 			if (transform.position.z < bottomRight.z - DistanceFromEdges ||
 				transform.position.z > topLeft.z + DistanceFromEdges ||
 			    transform.position.x < topLeft.x - DistanceFromEdges ||
-			    transform.position.x > bottomRight.x + DistanceFromEdges) {
-			
+			    transform.position.x > bottomRight.x + DistanceFromEdges)
+            {			
 				PrefabPoolController.ReturnInstance (gameObject);
 			}
 		

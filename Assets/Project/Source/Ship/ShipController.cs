@@ -1,16 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
-using System.Collections.Generic;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class ShipController : Controller {
+namespace AlfredoMB.Ship
+{
+    public class ShipController : MonoBehaviour, IController
+    {
 		public ShipModel Model;
 
 		private FlightControlController FlightControl;
 		private ArmorController Armor;
 
-		private void Awake() {
+		private void Awake()
+        {
 			// get components
 			FlightControl = GetComponent<FlightControlController> ();
 			Armor = GetComponent<ArmorController> ();
@@ -21,9 +22,9 @@ namespace AlfredoMB.Ship {
 			Armor.ShipModel = Model;
 		}
 
-		public void MoveTo(Vector3 p_position) {
-			FlightControl.MoveTo (p_position);
+		public void MoveTo(Vector3 position)
+        {
+			FlightControl.MoveTo (position);
 		}
-
 	}
 }

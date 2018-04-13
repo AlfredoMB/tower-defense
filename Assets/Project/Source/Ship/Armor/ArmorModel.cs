@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	[CreateAssetMenu]
-	public class ArmorModel : Model {
+namespace AlfredoMB.Ship
+{
+    [CreateAssetMenu]
+	public class ArmorModel : ScriptableObject, IModel
+    {
 		public float HitPoints;
 		public GameObject Explosion;
 	}

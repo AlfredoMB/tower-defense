@@ -1,12 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
-using AlfredoMB.PrefabPool;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Stage {
-	public class LifeLossView : View {
-
-		private void OnTriggerEnter() {
+namespace AlfredoMB.Stage
+{
+    public class LifeLossView : MonoBehaviour, IView
+    {
+		private void OnTriggerEnter()
+        {
 			StageController.Instance.OnEnemyPassed ();
 		}
 	}

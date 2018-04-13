@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 using AlfredoMB.MVC;
-using AlfredoMB.Ship;
 using AlfredoMB.Stage.Session;
 using UnityEngine.UI;
 
-namespace AlfredoMB.UI {
-	public class ScoreView : View {
+namespace AlfredoMB.UI
+{
+	public class ScoreView : MonoBehaviour, IView
+    {
 		public SessionModel Model { get; set; }
 
-		public enum ScoreTypes {
+		public enum ScoreTypes
+        {
 			Money,
 			Lives,
 		}
@@ -17,13 +18,16 @@ namespace AlfredoMB.UI {
 
 		public Text ValueTextComponent;
 
-		private void Update() {
+		private void Update()
+        {
 			float currentValue = 0;
 
-			switch (ScoreType) {
+			switch (ScoreType)
+            {
 				case ScoreTypes.Money:
 					currentValue = Model.Money;
 					break;
+
 				case ScoreTypes.Lives:
 					currentValue = Model.Lives;
 					break;

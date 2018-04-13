@@ -1,28 +1,33 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class CannonController : Controller {
+namespace AlfredoMB.Ship
+{
+    public class CannonController : MonoBehaviour, IController
+    {
 		public CannonModel Model { get; set; }
 		public CannonView View;
 
-		private float m_fireCooldown;
+		private float _fireCooldown;
 
 
-		public void Fire(Vector3 p_direction) {
-			if (m_fireCooldown > 0) {
+		public void Fire(Vector3 direction)
+        {
+			if (_fireCooldown > 0)
+            {
 				return;				
 			}
 
-			View.FireBullet(Model.Bullet, Model.ShootForce * p_direction);
+			View.FireBullet(Model.Bullet, Model.ShootForce * direction);
 
-			m_fireCooldown = Model.ShootCooldown;
+			_fireCooldown = Model.ShootCooldown;
 		}
 
-		private void Update() {
-			if (m_fireCooldown > 0) {
-				m_fireCooldown -= Time.deltaTime;
+		private void Update()
+        {
+			if (_fireCooldown > 0)
+            {
+				_fireCooldown -= Time.deltaTime;
 			}
 		}
 	}

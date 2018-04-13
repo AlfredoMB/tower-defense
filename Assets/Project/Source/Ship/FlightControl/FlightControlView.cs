@@ -1,21 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
+using UnityEngine;
 
-namespace AlfredoMB.Ship {
-	public class FlightControlView : View {
-		private Rigidbody m_rigidBody; 
+namespace AlfredoMB.Ship
+{
+    public class FlightControlView : MonoBehaviour, IView
+    {
+		private Rigidbody _rigidBody; 
 
 		public float DistanceFromEdges = 2f;
 
-		private void Start() {
-			m_rigidBody = GetComponent<Rigidbody> ();
+		private void Start()
+        {
+			_rigidBody = GetComponent<Rigidbody> ();
 		}
 
-		public void MoveTo(Vector3 p_direction, bool p_limitedByScreen) {
-			Vector3 newPosition = transform.position + p_direction * Time.deltaTime;
+		public void MoveTo(Vector3 direction, bool limitedByScreen)
+        {
+			Vector3 newPosition = transform.position + direction * Time.deltaTime;
 
-			if (p_limitedByScreen) {
+			if (limitedByScreen)
+            {
 				float cameraDistance = Camera.main.transform.position.y - transform.position.y;
 
 				Vector3 topLeft = Camera.main.ScreenToWorldPoint (new Vector3 (0, Camera.main.pixelHeight, cameraDistance));
@@ -24,7 +28,7 @@ namespace AlfredoMB.Ship {
 				newPosition.x = Mathf.Clamp (newPosition.x, topLeft.x + DistanceFromEdges, bottomRight.x - DistanceFromEdges);
 				newPosition.z = Mathf.Clamp (newPosition.z, bottomRight.z + DistanceFromEdges, topLeft.z - DistanceFromEdges);
 			}
-			m_rigidBody.position = (newPosition);
+			_rigidBody.position = (newPosition);
 		}
 	}
 }
