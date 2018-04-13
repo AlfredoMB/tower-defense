@@ -1,0 +1,20 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Project\Source\Stage\StageModel.cs">
+    <Files>
+      <File FileName="Assets\Project\Source\Builder\BuilderController.cs" Line="62" Column="4" />
+      <File FileName="Assets\Project\Source\Ship\ShipModel.cs" Line="13" Column="2" />
+      <File FileName="Assets\Project\Source\Ship\ShipController.cs" Line="27" Column="1" />
+      <File FileName="Assets\Project\Source\Stage\EnemySpawn\EnemySpawnController.cs" Line="41" Column="51" />
+      <File FileName="Assets\Project\Source\Stage\StageController.cs" Line="43" Column="23" />
+      <File FileName="Assets\Project\Source\Stage\EnemySpawn\EnemySpawnView.cs" Line="10" Column="72" />
+      <File FileName="Assets\Project\Source\Ship\Armor\ArmorView.cs" Line="18" Column="16" />
+      <File FileName="Assets\Project\Source\Ship\Armor\ArmorController.cs" Line="37" Column="10" />
+      <File FileName="Assets\Project\Source\Stage\StageModel.cs" Line="14" Column="28" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
