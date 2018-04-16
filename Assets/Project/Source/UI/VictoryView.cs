@@ -1,12 +1,20 @@
 ﻿using AlfredoMB.Stage;
+using AlfredoMB.DI;
 
 namespace AlfredoMB.UI
 {
 	public class VictoryView : EndGameView
     {
-		protected override bool IsTimeToActivate()
+        private IStageController _stageController;
+
+        private void Start()
         {
-			return StageController.Instance.IsVictory;
+            _stageController = SimpleDI.Get<IStageController>();
+        }
+
+        protected override bool IsTimeToActivate()
+        {
+			return _stageController.IsVictory;
 		}
 	}
 }

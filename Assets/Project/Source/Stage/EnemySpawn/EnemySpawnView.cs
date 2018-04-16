@@ -7,7 +7,7 @@ namespace AlfredoMB.Stage.EnemySpawn
 {
     public class EnemySpawnView : MonoBehaviour, IView
     {
-		public void Spawn(SpawnModel spawnModel, Transform destination)
+		public void Spawn(EnemySpawnModel.SpawnModel spawnModel, Transform destination)
         {
 			ShipController newEnemy = PrefabPoolController.GetInstance(spawnModel.Ship.gameObject).GetComponent<ShipController>();
 			newEnemy.transform.position = transform.position;

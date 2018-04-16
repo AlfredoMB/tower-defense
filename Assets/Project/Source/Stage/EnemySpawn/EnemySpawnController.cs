@@ -1,5 +1,6 @@
 ﻿using AlfredoMB.MVC;
 using System.Collections.Generic;
+using AlfredoMB.DI;
 using UnityEngine;
 
 namespace AlfredoMB.Stage.EnemySpawn
@@ -11,7 +12,7 @@ namespace AlfredoMB.Stage.EnemySpawn
 		public Transform Destination;
 
 		private float _time;
-		private List<SpawnModel> _spawnList;
+		private List<EnemySpawnModel.SpawnModel> _spawnList;
 
 		private EnemySpawnModel m_model;
 		public EnemySpawnModel Model
@@ -25,20 +26,26 @@ namespace AlfredoMB.Stage.EnemySpawn
             {
 				m_model = value;
 				_time = 0;
-				_spawnList = new List<SpawnModel> (Model.SpawnList);
+				_spawnList = new List<EnemySpawnModel.SpawnModel> (Model.SpawnList);
 			}
 		}
+        
+        private IStageController _stageController;
 
+        private void Start()
+        {
+            _stageController = SimpleDI.Get<IStageController>();
+        }
 
-		private void Update()
+        private void Update()
         {
 			_time += Time.deltaTime;
 
-			foreach(SpawnModel spawn in _spawnList)
+			foreach(EnemySpawnModel.SpawnModel spawn in _spawnList)
             {
 				if (spawn.Time <= _time)
                 {
-					StageController.Instance.OnShipSpawned ();
+                    _stageController.OnShipSpawned ();
 					View.Spawn(spawn, Destination);
 				}
 			}
@@ -46,7 +53,7 @@ namespace AlfredoMB.Stage.EnemySpawn
 
 			if (_spawnList.Count <= 0)
             {
-				StageController.Instance.AllEnemiesSpawned ();
+                _stageController.AllEnemiesSpawned ();
 			}
 		}
 

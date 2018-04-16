@@ -8,8 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4657578880b50243815985c35e3202f, type: 3}
-  m_Name: Session
+  m_Script: {fileID: 11500000, guid: 075c84a9813a990468b458a606dde90c, type: 3}
+  m_Name: BuilderModel01
   m_EditorClassIdentifier: 
-  Money: 630
-  Lives: 10
+  BuilderModel:
+    SelectedTower: {fileID: 11400000, guid: b85540ce50397c941bee1fd685d2c5d1, type: 2}

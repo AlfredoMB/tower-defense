@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4562ceccfc8a6504493276c544e7b7ab, type: 3}
   m_Name: Stage01
   m_EditorClassIdentifier: 
+  Lives: 3
+  Money: 100
   EnemySpawn: {fileID: 11400000, guid: 609164ca806f13146a55aa85cd22e398, type: 2}
-  StartingLives: 10
-  StartingMoney: 250
+  SelectedTower: {fileID: 11400000, guid: b85540ce50397c941bee1fd685d2c5d1, type: 2}

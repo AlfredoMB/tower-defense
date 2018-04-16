@@ -1,15 +1,26 @@
-﻿using UnityEngine;
-using AlfredoMB.MVC;
+﻿using AlfredoMB.MVC;
 using AlfredoMB.Stage.EnemySpawn;
+using AlfredoMB.Board;
+using AlfredoMB.Tower;
+using System;
 
 namespace AlfredoMB.Stage
 {
-    [CreateAssetMenu]
-	public class StageModel : ScriptableObject, IModel
+    [Serializable]
+    public class StageModel : IModel
     {
-		public EnemySpawnModel EnemySpawn;
+        public int Lives;
+		public int Money;
 
-		public int StartingLives;
-		public int StartingMoney;
-	}
+        public StageModel(StageModel stageModel)
+        {
+            Lives = stageModel.Lives;
+            Money = stageModel.Money;
+        }
+
+        public BoardModel Board { get; set; }
+		public EnemySpawnModel EnemySpawn { get; set; }
+
+        public TowerModel SelectedTower;
+    }
 }

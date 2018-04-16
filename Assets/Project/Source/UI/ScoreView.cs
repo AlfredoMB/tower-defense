@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
 using AlfredoMB.MVC;
-using AlfredoMB.Stage.Session;
 using UnityEngine.UI;
 
 namespace AlfredoMB.UI
 {
 	public class ScoreView : MonoBehaviour, IView
     {
-		public SessionModel Model { get; set; }
-
 		public enum ScoreTypes
         {
 			Money,
@@ -21,7 +18,7 @@ namespace AlfredoMB.UI
 		private void Update()
         {
 			float currentValue = 0;
-
+            /*
 			switch (ScoreType)
             {
 				case ScoreTypes.Money:
@@ -32,7 +29,7 @@ namespace AlfredoMB.UI
 					currentValue = Model.Lives;
 					break;
 			}
-
+            */
 			ValueTextComponent.text = currentValue.ToString ();
 		}
 	}

@@ -9,13 +9,13 @@ namespace AlfredoMB.Stage.EnemySpawn
     [CreateAssetMenu]
 	public class EnemySpawnModel : ScriptableObject, IModel
     {
-		public List<SpawnModel> SpawnList;
-	}
+        [Serializable]
+	    public class SpawnModel
+        {
+		    public float Time;
+		    public ShipController Ship;
+	    }
 
-	[Serializable]
-	public class SpawnModel
-    {
-		public float Time;
-		public ShipController Ship;
-	}
+		public List<SpawnModel> SpawnList;
+	}	
 }

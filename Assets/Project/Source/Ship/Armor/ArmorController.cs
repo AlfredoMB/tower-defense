@@ -1,6 +1,7 @@
 ﻿using AlfredoMB.MVC;
 using AlfredoMB.PrefabPool;
 using AlfredoMB.Stage;
+using AlfredoMB.DI;
 using UnityEngine;
 
 namespace AlfredoMB.Ship
@@ -27,8 +28,14 @@ namespace AlfredoMB.Ship
 
 		public ShipModel ShipModel { get; set; }
 
+        private IStageController _stageController;
 
-		public void OnBulletHit(BulletView bullet)
+        private void Start()
+        {
+            _stageController = SimpleDI.Get<IStageController>();
+        }
+
+        public void OnBulletHit(BulletView bullet)
         {
 			TakeDamage (bullet.Controller.Model.Damage);
 		}
@@ -39,7 +46,7 @@ namespace AlfredoMB.Ship
 
 			if (_thisModel.HitPoints <= 0)
             {
-				StageController.Instance.OnShipDestroyed (ShipModel);
+                _stageController.OnShipDestroyed (ShipModel);
 				View.Die ();
 			}
 		}

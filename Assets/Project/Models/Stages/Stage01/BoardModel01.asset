@@ -8,10 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57d384b082c87ca448235910a1507200, type: 3}
-  m_Name: StraightFlyer
+  m_Script: {fileID: 11500000, guid: 9df5702bd892fff4d82bfcb8e400b4a8, type: 3}
+  m_Name: BoardModel01
   m_EditorClassIdentifier: 
-  InstructionList:
-  - Time: 0
-    Direction: {x: 1, y: 0, z: 0}
-    FireDirection: {x: 0, y: 0, z: 0}
+  BoardModel:
+    TileSize: 2
+    XTiles: 33
+    YTiles: 17

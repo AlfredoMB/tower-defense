@@ -1,72 +1,72 @@
-﻿using AlfredoMB.MVC;
-using AlfredoMB.PrefabPool;
+﻿using AlfredoMB.Command;
+using AlfredoMB.DI;
+using AlfredoMB.DI.Decoupling;
+using AlfredoMB.MVC;
+using AlfredoMB.Stage;
 using UnityEngine;
 
 namespace AlfredoMB.Builder
 {
+    /// <summary>
+    /// Moves Builder cursor on the board;
+    /// Changes Builder cursor's color based on possible positioning;
+    /// Sends BuildTowerCommand on click;
+    /// </summary>
     public class BuilderView : MonoBehaviour, IView
     {
-		public BuilderModel Model { get; set; }
-		public BuilderController Controller { get; set; }
+		public Renderer[] MeshRenderers;
 
-		public GameObject Reference;
+        private ICamera _camera;
+        private IInput _input;
+        private ICommandController _commandController;
+        private IStageController _stageController;
 
-		public bool ReadyToBuild { get; private set; }
-
-		public Vector3 CurrentTileNE;
-		public Vector3 CurrentTileSE;
-		public Vector3 CurrentTileNW;
-		public Vector3 CurrentTileSW;
-
-		private Renderer[] _meshRenderers;
-
-
-		private void Start()
+        private void Start()
         {
-			_meshRenderers = Reference.GetComponentsInChildren<Renderer> ();
+            _camera = SimpleDI.Get<ICamera>();
+            _input = SimpleDI.Get<IInput>();
+            _commandController = SimpleDI.Get<ICommandController>();
+            _stageController = SimpleDI.Get<IStageController>();
+        }
+
+        private void Update()
+        {
+            var position = GetBuildPosition();
+            transform.position = position;
+
+			SetColor (CanBuild(position) 
+                ? Color.green 
+                : Color.red);
 		}
 
-		private void Update()
+        private void OnMouseUpAsButton()
         {
-			Vector3 mousePosition = Camera.main.ScreenToWorldPoint (UnityEngine.Input.mousePosition);
-			mousePosition.y = 0;
+            _commandController.AddCommand(new BuildTowerCommand(GetBuildPosition(), _stageController.CurrentState.SelectedTower));
+        }
 
-			Vector3 TilePosition = new Vector3 (Mathf.RoundToInt(mousePosition.x / Model.TileSize) * Model.TileSize, 0, Mathf.RoundToInt(mousePosition.z / Model.TileSize) * Model.TileSize);
-
-			Reference.transform.position = TilePosition;
-
-			Vector3 LogicTilePosition = (TilePosition - transform.position) / Model.TileSize;
-
-			Vector3 tilePositionNE = new Vector3 (0, 0, 0);
-			Vector3 tilePositionSE = new Vector3 (0, 0, -1);
-			Vector3 tilePositionNW = new Vector3 (-1, 0, 0);
-			Vector3 tilePositionSW = new Vector3 (-1, 0, -1);
-
-			CurrentTileNE = (LogicTilePosition + tilePositionNE);
-			CurrentTileSE = (LogicTilePosition + tilePositionSE);
-			CurrentTileNW = (LogicTilePosition + tilePositionNW);
-			CurrentTileSW = (LogicTilePosition + tilePositionSW);
-
-			ReadyToBuild = Controller.IsFree (CurrentTileNE) &&
-				Controller.IsFree (CurrentTileSE) &&
-				Controller.IsFree (CurrentTileNW) &&
-				Controller.IsFree (CurrentTileSW);
-
-			SetColor ((ReadyToBuild) ? Color.green : Color.red);
-		}
-
-		private void SetColor(Color color)
+        private Vector3 GetBuildPosition()
         {
-			foreach(MeshRenderer renderer in _meshRenderers)
+            var position = _camera.ScreenToWorldPoint(_input.mousePosition);
+            var board = _stageController.CurrentState.Board;
+
+            return new Vector3(
+                Mathf.RoundToInt(position.x / board.TileSize) * board.TileSize,
+                0,
+                Mathf.RoundToInt(position.z / board.TileSize) * board.TileSize);
+        }
+
+        private bool CanBuild(Vector3 position)
+        {
+            var tilePosition = new TilePosition(position, _stageController.CurrentState.Board);
+            return _stageController.CurrentState.Board.IsFree(tilePosition);
+        }
+
+        private void SetColor(Color color)
+        {
+			foreach(MeshRenderer renderer in MeshRenderers)
             {
 				renderer.material.color = color;
 			}
-		}
-
-		public void Build(GameObject prefab)
-        {
-			GameObject newTower = PrefabPoolController.GetInstance(prefab.gameObject);
-			newTower.transform.position = Reference.transform.position;
 		}
 	}
 }

@@ -1,13 +1,21 @@
 ﻿using AlfredoMB.MVC;
+using AlfredoMB.DI;
 using UnityEngine;
 
 namespace AlfredoMB.Stage
 {
     public class LifeLossView : MonoBehaviour, IView
     {
-		private void OnTriggerEnter()
+        private IStageController _stageController;
+
+        private void Start()
         {
-			StageController.Instance.OnEnemyPassed ();
+            _stageController = SimpleDI.Get<IStageController>();
+        }
+
+        private void OnTriggerEnter()
+        {
+            _stageController.OnEnemyPassed ();
 		}
 	}
 }
