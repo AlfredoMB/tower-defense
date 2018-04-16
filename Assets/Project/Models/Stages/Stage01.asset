@@ -8,10 +8,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4562ceccfc8a6504493276c544e7b7ab, type: 3}
+  m_Script: {fileID: 0}
   m_Name: Stage01
-  m_EditorClassIdentifier: 
-  Lives: 3
-  Money: 100
-  EnemySpawn: {fileID: 11400000, guid: 609164ca806f13146a55aa85cd22e398, type: 2}
-  SelectedTower: {fileID: 11400000, guid: b85540ce50397c941bee1fd685d2c5d1, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp:AlfredoMB.Stage:StageModelScriptableObject
+  BoardModelScriptableObject: {fileID: 11400000, guid: 2055da5ccc38af84cbe3927e5743944b,
+    type: 2}
+  BuilderModelScriptableObject: {fileID: 11400000, guid: 29988fc1212bdf24ea3b4b051865cc74,
+    type: 2}
+  StageModel:
+    Lives: 3
+    Money: 100

@@ -29,7 +29,7 @@ namespace AlfredoMB.Board
 
         public void Build(TilePosition tilePosition, TowerModel tower)
         {
-            tower.SetPosition(tilePosition);
+            tower.SetTilePosition(tilePosition);
             Towers.Add(tower);
 
             OccupyTile(tilePosition.TileNE);

@@ -8,9 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: StageModel01
-  m_EditorClassIdentifier: Assembly-CSharp:AlfredoMB.Stage:StageModelScriptableObject
-  StageModel:
-    Lives: 3
-    Money: 100
+  m_Script: {fileID: 11500000, guid: 450954e956e802b4c8a50caf7828b395, type: 3}
+  m_Name: StandardTurret1
+  m_EditorClassIdentifier: 
+  TurretModel:
+    Cannon: {fileID: 0}
+    TurnSpeed: 100
+    ActionRadius: 4

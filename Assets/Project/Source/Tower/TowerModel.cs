@@ -7,16 +7,23 @@ using System;
 
 namespace AlfredoMB.Tower
 {
-	[CreateAssetMenu]
-	public class TowerModel : ScriptableObject, IModel, IRecipe
+    [Serializable]
+	public class TowerModel : IModel, IRecipe
     {        
-		public TurretModel Turret;
 		public int Cost;
 		public string Name;
 
+        public TurretModel Turret { get; private set; }
         public TilePosition TilePosition { get; private set; }
 
         private Dictionary<object, int> _cost;
+
+        public TowerModel(TowerModel towerModel, TurretModel turretModel)
+        {
+            Turret = turretModel;
+            Cost = towerModel.Cost;
+            Name = towerModel.Name;
+        }
 
         public Dictionary<object, int> GetCost()
         {
@@ -24,7 +31,7 @@ namespace AlfredoMB.Tower
             return _cost ?? (_cost = new Dictionary<object, int>() { { this, Cost } });
         }
 
-        public void SetPosition(TilePosition tilePosition)
+        public void SetTilePosition(TilePosition tilePosition)
         {
             TilePosition = tilePosition;
         }

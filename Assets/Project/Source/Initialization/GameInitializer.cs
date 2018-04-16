@@ -1,5 +1,4 @@
-﻿using AlfredoMB.Board;
-using AlfredoMB.Builder;
+﻿using AlfredoMB.Builder;
 using AlfredoMB.Command;
 using AlfredoMB.DI;
 using AlfredoMB.DI.Decoupling;
@@ -11,23 +10,17 @@ namespace AlfredoMB.Initialization
 {
     public class GameInitializer : MonoBehaviour
     {
+        public StageModelScriptableObject StageModelScriptableObject;
         public GameObject Views;
-
-        public BoardModelScriptableObject BoardScriptableObject;
-        public StageModelScriptableObject StageScriptableObject;
-
+                
         private void Start()
         {
             // register dependencies
             SimpleDI.Register<ICamera>(new UnityCamera());
             SimpleDI.Register<IInput>(new UnityInput());
             SimpleDI.Register<ICommandController>( new CommandController());
-
-            var boardModel = new BoardModel(BoardScriptableObject.BoardModel);
-            var stageModel = new StageModel(StageScriptableObject.StageModel);
-
-            SimpleDI.Register<IStageController>(new StageController(stageModel, boardModel));
-            SimpleDI.Register<IBuilderController>(new BuilderController(boardModel));
+            SimpleDI.Register<IStageController>(new StageController(StageModelScriptableObject.ToModel()));
+            SimpleDI.Register<IBuilderController>(new BuilderController());
 
             Views.SetActive(true);
         }

@@ -41,13 +41,14 @@ namespace AlfredoMB.Builder
 
         private void OnMouseUpAsButton()
         {
-            _commandController.AddCommand(new BuildTowerCommand(GetBuildPosition(), _stageController.CurrentState.SelectedTower));
+            _commandController.AddCommand(
+                new BuildTowerCommand(GetBuildPosition(), _stageController.CurrentState.BuilderModel.SelectedTower));
         }
 
         private Vector3 GetBuildPosition()
         {
             var position = _camera.ScreenToWorldPoint(_input.mousePosition);
-            var board = _stageController.CurrentState.Board;
+            var board = _stageController.CurrentState.BoardModel;
 
             return new Vector3(
                 Mathf.RoundToInt(position.x / board.TileSize) * board.TileSize,
@@ -57,8 +58,8 @@ namespace AlfredoMB.Builder
 
         private bool CanBuild(Vector3 position)
         {
-            var tilePosition = new TilePosition(position, _stageController.CurrentState.Board);
-            return _stageController.CurrentState.Board.IsFree(tilePosition);
+            var tilePosition = new TilePosition(position, _stageController.CurrentState.BoardModel);
+            return _stageController.CurrentState.BoardModel.IsFree(tilePosition);
         }
 
         private void SetColor(Color color)

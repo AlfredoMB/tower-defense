@@ -5,7 +5,6 @@ namespace AlfredoMB.Stage
 {
     public interface IStageController : IController
     {
-        StageModel Model { get; }
         StageModel CurrentState { get; }
 
         bool IsGameOver { get; }

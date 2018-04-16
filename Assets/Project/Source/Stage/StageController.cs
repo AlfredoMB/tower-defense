@@ -6,8 +6,7 @@ namespace AlfredoMB.Stage
 {
     public class StageController : IStageController
     {
-		public StageModel Model { get; private set; }
-        public StageModel CurrentState { get; private set; }
+		public StageModel CurrentState { get; private set; }
 
 		private int _enemiesSpawned;
 		private bool _allEnemiesSpawned;
@@ -15,12 +14,8 @@ namespace AlfredoMB.Stage
         public bool IsGameOver { get { return CurrentState.Lives <= 0; } }
 		public bool IsVictory { get { return _allEnemiesSpawned && _enemiesSpawned <= 0; } }
         
-        public StageController(StageModel model, BoardModel boardModel)
+        public StageController(StageModel model)
         {
-            Model = model;
-            Model.Board = boardModel;
-
-            // TODO: this is wrong; change it in the future:
             CurrentState = model;
         }
         

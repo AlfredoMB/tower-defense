@@ -12,19 +12,16 @@ namespace AlfredoMB.Builder
     /// </summary>
     public class BuilderController : IBuilderController
     {
-        private BoardModel _boardModel;
-
         private ICommandController _commandController;
         private IStageController _stage;
 
-        public BuilderController(BoardModel boardModel)
+        public BuilderController()
         {
-            _boardModel = boardModel;
-
             _commandController = SimpleDI.Get<ICommandController>();
             _commandController.AddListener<BuildTowerCommand>(OnBuildTowerCommand);
 
             _stage = SimpleDI.Get<IStageController>();
+            _stage.CurrentState.BuilderModel.SelectTower(0);
         }
 
         ~BuilderController()
@@ -43,18 +40,18 @@ namespace AlfredoMB.Builder
 
         private void TryToBuild(Vector3 position, TowerModel tower)
         {
-            var tilePosition = new TilePosition(position, _boardModel);
+            var tilePosition = new TilePosition(position, _stage.CurrentState.BoardModel);
 
             if (CanBuild(tilePosition) && HasMoneyToBuild(tower))
             {
                 SpendMoney(tower);
-                _boardModel.Build(tilePosition, tower);
+                _stage.CurrentState.BoardModel.Build(tilePosition, tower);
             }
         }
 
         private bool CanBuild(TilePosition tilePosition)
         {
-            return _boardModel.IsFree(tilePosition);
+            return _stage.CurrentState.BoardModel.IsFree(tilePosition);
         }
 
         private bool HasMoneyToBuild(TowerModel tower)

@@ -1,7 +1,7 @@
-﻿using AlfredoMB.MVC;
+﻿using AlfredoMB.Board;
+using AlfredoMB.Builder;
+using AlfredoMB.MVC;
 using AlfredoMB.Stage.EnemySpawn;
-using AlfredoMB.Board;
-using AlfredoMB.Tower;
 using System;
 
 namespace AlfredoMB.Stage
@@ -10,17 +10,20 @@ namespace AlfredoMB.Stage
     public class StageModel : IModel
     {
         public int Lives;
-		public int Money;
+        public int Money;
 
-        public StageModel(StageModel stageModel)
+        public BuilderModel BuilderModel { get; set; }
+        public BoardModel BoardModel { get; set; }
+
+		public EnemySpawnModel EnemySpawn { get; set; }
+
+        public StageModel(StageModel stageModel, BuilderModel builderModel, BoardModel boardModel)
         {
             Lives = stageModel.Lives;
             Money = stageModel.Money;
+
+            BuilderModel = builderModel;
+            BoardModel = boardModel;
         }
-
-        public BoardModel Board { get; set; }
-		public EnemySpawnModel EnemySpawn { get; set; }
-
-        public TowerModel SelectedTower;
     }
 }

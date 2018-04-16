@@ -13,38 +13,35 @@ namespace AlfredoMB.Board
     /// </summary>
     public class BoardView : MonoBehaviour, IView
     {
-        public TowerView Tower1;
-        public TowerView Tower2;
+        public TowerView[] TowerPrefabs;
 
         private IStageController _stageController;
 
         private List<TowerView> _instantiatedTowers = new List<TowerView>();
-
-        private void Start()
-        {
-            _stageController = SimpleDI.Get<IStageController>();
-        }
-
+        
         private void OnEnable()
         {
-            _stageController.CurrentState.Board.OnUpdated += OnModelUpdated;
+            _stageController = SimpleDI.Get<IStageController>();
+            _stageController.CurrentState.BoardModel.OnUpdated += OnModelUpdated;
         }
 
         private void OnDisable()
         {
-            _stageController.CurrentState.Board.OnUpdated -= OnModelUpdated;
+            _stageController.CurrentState.BoardModel.OnUpdated -= OnModelUpdated;
         }
 
         private void OnModelUpdated()
         {
-            foreach(var tower in _stageController.CurrentState.Board.Towers)
+            var towers = _stageController.CurrentState.BoardModel.Towers;
+            foreach (var tower in towers)
             {
                 if (_instantiatedTowers.Find(instantiated => instantiated.Model == tower) != null)
                 {
                     continue;
                 }
 
-                Build(Tower1, tower);
+                // TODO: always Tower1 for now
+                Build(TowerPrefabs[0], tower);
             }
         }
 
@@ -55,9 +52,10 @@ namespace AlfredoMB.Board
             _instantiatedTowers.Add(newTower.GetComponent<TowerView>());
         }
 
+        /*
         private void OnDrawGizmos()
         {
-            var board = _stageController.CurrentState.Board;
+            var board = _stageController.CurrentState.BoardModel;
             if (board.OccupiedTiles != null)
             {
                 for (int i = 0; i < board.OccupiedTiles.GetUpperBound(0); i++)
@@ -81,5 +79,6 @@ namespace AlfredoMB.Board
                 }
             }
         }
+        */
     }
 }
