@@ -1,111 +1,70 @@
-﻿using AlfredoMB.MVC;
-using AlfredoMB.Stage.Session;
+﻿using AlfredoMB.Board;
+using AlfredoMB.Command;
+using AlfredoMB.DI;
+using AlfredoMB.Stage;
 using AlfredoMB.Tower;
 using UnityEngine;
 
 namespace AlfredoMB.Builder
 {
-    public class BuilderController : MonoBehaviour, IController
+    /// <summary>
+    /// Changes BoardModel based on BuildTowerCommand
+    /// </summary>
+    public class BuilderController : IBuilderController
     {
-		public BuilderModel Model;
-		public BuilderView View;
+        private BoardModel _boardModel;
 
-		public TowerController CurrentTower;
+        private ICommandController _commandController;
+        private IStageController _stage;
 
-		public TowerController Tower1;
-		public TowerController Tower2;
-
-
-		private bool[,] _occupiedTiles;
-
-
-		private void Start()
+        public BuilderController(BoardModel boardModel)
         {
-			_occupiedTiles = new bool[Model.XTiles, Model.YTiles];
+            _boardModel = boardModel;
 
-			View.Model = Model;
-			View.Controller = this;
-		}
+            _commandController = SimpleDI.Get<ICommandController>();
+            _commandController.AddListener<BuildTowerCommand>(OnBuildTowerCommand);
 
-		private void OnDrawGizmos()
+            _stage = SimpleDI.Get<IStageController>();
+        }
+
+        ~BuilderController()
         {
-			if (_occupiedTiles != null)
-            { 
-				for (int i = 0; i < _occupiedTiles.GetUpperBound (0); i++)
-                {
-					for (int j = 0; j < _occupiedTiles.GetUpperBound (1); j++)
-                    {
-						Vector3 center = transform.position + new Vector3 (i, 0, j) * Model.TileSize + new Vector3 (1, 0, 1) * Model.TileSize * 0.5f;
-						Vector3 size = Vector3.one * Model.TileSize;
-
-						if (_occupiedTiles [i, j])
-                        {
-							Gizmos.color = Color.red;
-							Gizmos.DrawCube (center, size);
-						}
-                        else
-                        {
-							Gizmos.color = Color.green;
-							Gizmos.DrawWireCube (center, size);
-						}
-					}
-				}
-			}
-		}
-
-		public bool IsFree(Vector3 p_tilePosition)
-        {
-			if (p_tilePosition.x < 0 || p_tilePosition.x >= Model.XTiles - 1 || p_tilePosition.z < 0 || p_tilePosition.z >= Model.YTiles - 1)
+            if (_commandController != null)
             {
-				return false;
-			}
-            else
-            {
-				return !_occupiedTiles [(int)p_tilePosition.x, (int)p_tilePosition.z];
-			}
-		}
+                _commandController.RemoveListener<BuildTowerCommand>(OnBuildTowerCommand);
+            }
+        }
 
-		private void OccupyTile(Vector3 p_tilePosition)
+        private void OnBuildTowerCommand(ICommand command)
         {
-			_occupiedTiles [(int)p_tilePosition.x, (int)p_tilePosition.z] = true;
-		}
+            var buildCommand = command as BuildTowerCommand;
+            TryToBuild(buildCommand.Position, buildCommand.Tower);
+        }
 
-		private bool HasMoneyToBuild()
+        private void TryToBuild(Vector3 position, TowerModel tower)
         {
-			return SessionController.Instance.Model.Money >= CurrentTower.Model.Cost;
-		}
+            var tilePosition = new TilePosition(position, _boardModel);
 
-		private void SpendMoney()
+            if (CanBuild(tilePosition) && HasMoneyToBuild(tower))
+            {
+                SpendMoney(tower);
+                _boardModel.Build(tilePosition, tower);
+            }
+        }
+
+        private bool CanBuild(TilePosition tilePosition)
         {
-			SessionController.Instance.Model.Money -= CurrentTower.Model.Cost;
-		}
+            return _boardModel.IsFree(tilePosition);
+        }
 
-		private void Update()
+        private bool HasMoneyToBuild(TowerModel tower)
         {
-			if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-				CurrentTower = Tower1;
-			}
+            return _stage.CurrentState.Money >= tower.Cost;
+        }
 
-			if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-				CurrentTower = Tower2;
-			}
-
-			if (UnityEngine.Input.GetMouseButtonDown(0))
-            {
-				if (View.ReadyToBuild && HasMoneyToBuild())
-                {
-					SpendMoney ();
-
-					OccupyTile (View.CurrentTileNE);
-					OccupyTile (View.CurrentTileSE);
-					OccupyTile (View.CurrentTileNW);
-					OccupyTile (View.CurrentTileSW);
-						
-					View.Build (CurrentTower.gameObject);
-				}
-			}
-		}
-	}
+        private void SpendMoney(TowerModel tower)
+        {
+            _stage.CurrentState.Money -= tower.Cost;
+        }        
+    }
 }
