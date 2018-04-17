@@ -16,13 +16,20 @@ namespace AlfredoMB.Board
 
         public bool[,] OccupiedTiles { get; private set; }
         public List<TowerModel> Towers { get; private set; }
+
+        public BoardModel()
+        { }
         
         public BoardModel(BoardModel reference)
         {
             TileSize = reference.TileSize;
             XTiles = reference.XTiles;
             YTiles = reference.YTiles;
+            Initialize();
+        }
 
+        public void Initialize()
+        {
             OccupiedTiles = new bool[XTiles, YTiles];
             Towers = new List<TowerModel>();
         }

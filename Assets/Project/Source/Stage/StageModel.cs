@@ -17,6 +17,9 @@ namespace AlfredoMB.Stage
 
 		public EnemySpawnModel EnemySpawn { get; set; }
 
+        public StageModel()
+        { }
+
         public StageModel(StageModel stageModel, BuilderModel builderModel, BoardModel boardModel)
         {
             Lives = stageModel.Lives;

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using AlfredoMB.Ship;
-using AlfredoMB.Board;
+﻿using AlfredoMB.Ship;
 
 namespace AlfredoMB.Stage
 {
@@ -24,9 +22,9 @@ namespace AlfredoMB.Stage
             CurrentState.Lives--;
 		}
 
-		public void OnShipDestroyed(ShipModel p_destroyedShip)
+		public void OnShipDestroyed(ShipModel destroyedShip)
         {
-            CurrentState.Money += p_destroyedShip.ScoreValue;
+            CurrentState.Money += destroyedShip.ScoreValue;
 			_enemiesSpawned--;
 		}
 

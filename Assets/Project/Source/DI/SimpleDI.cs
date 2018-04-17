@@ -19,5 +19,10 @@ namespace AlfredoMB.DI
         {
             return (T)_instances[typeof(T)];
         }
+
+        public static void Reset()
+        {
+            _instances.Clear();
+        }
     }
 }

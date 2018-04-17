@@ -8,13 +8,16 @@ namespace AlfredoMB.Builder
     [Serializable]
     public class BuilderModel : IModel
     {
-        public List<TowerModel> AvailableTowers { get; private set; }
+        public List<TowerModel> AvailableTowers = new List<TowerModel>();
 
         public TowerModel SelectedTower { get; private set; }
 
-        public BuilderModel(BuilderModel builderModel, List<TowerModel> towers)
+        public BuilderModel()
+        { }
+
+        public BuilderModel(BuilderModel builderModel)
         {
-            AvailableTowers = towers;
+            AvailableTowers = builderModel.AvailableTowers;
         }
 
         public void SelectTower(int index)

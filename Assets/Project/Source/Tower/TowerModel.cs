@@ -18,6 +18,9 @@ namespace AlfredoMB.Tower
 
         private Dictionary<object, int> _cost;
 
+        public TowerModel()
+        { }
+
         public TowerModel(TowerModel towerModel, TurretModel turretModel)
         {
             Turret = turretModel;

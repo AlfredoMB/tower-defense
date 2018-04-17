@@ -12,7 +12,7 @@ namespace AlfredoMB.Stage
 
         void AllEnemiesSpawned();
         void OnEnemyPassed();
-        void OnShipDestroyed(ShipModel p_destroyedShip);
+        void OnShipDestroyed(ShipModel destroyedShip);
         void OnShipSpawned();
     }
 }

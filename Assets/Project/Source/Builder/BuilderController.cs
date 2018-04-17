@@ -3,6 +3,7 @@ using AlfredoMB.Command;
 using AlfredoMB.DI;
 using AlfredoMB.Stage;
 using AlfredoMB.Tower;
+using System;
 using UnityEngine;
 
 namespace AlfredoMB.Builder
@@ -10,7 +11,7 @@ namespace AlfredoMB.Builder
     /// <summary>
     /// Changes BoardModel based on BuildTowerCommand
     /// </summary>
-    public class BuilderController : IBuilderController
+    public class BuilderController : IBuilderController, IDisposable
     {
         private ICommandController _commandController;
         private IStageController _stage;
@@ -24,7 +25,7 @@ namespace AlfredoMB.Builder
             _stage.CurrentState.BuilderModel.SelectTower(0);
         }
 
-        ~BuilderController()
+        public void Dispose()
         {
             if (_commandController != null)
             {

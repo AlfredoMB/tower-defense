@@ -14,13 +14,12 @@ namespace AlfredoMB.Builder
 
         public BuilderModel ToModel()
         {
-            var towers = new List<TowerModel>();
             foreach(var tower in Towers)
             {
-                towers.Add(tower.ToModel());
+                BuilderModel.AvailableTowers.Add(tower.ToModel());
             }
 
-            return new BuilderModel(BuilderModel, towers);
+            return new BuilderModel(BuilderModel);
         }
     }
 }
