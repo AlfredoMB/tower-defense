@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 6575864}
   - component: {fileID: 2386408}
   - component: {fileID: 11443690}
-  - component: {fileID: 11404502}
   m_Layer: 9
-  m_Name: Tower
+  m_Name: Body
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,9 +47,9 @@ GameObject:
   - component: {fileID: 3382314}
   - component: {fileID: 13648516}
   - component: {fileID: 2333860}
-  - component: {fileID: 11450494}
+  - component: {fileID: 114746198601434042}
   m_Layer: 9
-  m_Name: Cylinder
+  m_Name: Radar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +63,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 498304}
-  - component: {fileID: 11432184}
   - component: {fileID: 114551183256922540}
   m_Layer: 9
   m_Name: StandardTower
@@ -83,7 +81,7 @@ GameObject:
   - component: {fileID: 402866}
   - component: {fileID: 3370726}
   - component: {fileID: 2326174}
-  - component: {fileID: 11444066}
+  - component: {fileID: 114174143713825724}
   m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
@@ -101,7 +99,6 @@ GameObject:
   - component: {fileID: 459894}
   - component: {fileID: 3325112}
   - component: {fileID: 2396468}
-  - component: {fileID: 11437928}
   - component: {fileID: 11415414}
   m_Layer: 9
   m_Name: Cannon
@@ -185,7 +182,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.1589556, y: 5.21, z: 7.2201223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 494618}
@@ -410,17 +407,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11404502
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0202305939a64ca488c979dc33944368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11415414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,33 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d55bdd3f9486a4ba63e84786c404b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11432184
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fad031b4d6bb0f8419865abc97b4a7fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Model:
-    Cost: 0
-    Name: 
-  Turret: {fileID: 11444066}
---- !u!114 &11437928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a53412769bc7d8c4e87191a3dc8d37bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  View: {fileID: 11415414}
 --- !u!114 &11443690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -473,31 +432,6 @@ MonoBehaviour:
   lowestY: -4
   timer: 0
   SetTimer: 0
---- !u!114 &11444066
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fcc6795c7eaa434d94ee6d524f482b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  View: {fileID: 11450494}
-  Cannon: {fileID: 11437928}
---- !u!114 &11450494
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 151356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a88c924052132f44babfd602423ddd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActionRadius: {fileID: 486782}
 --- !u!136 &13648516
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -522,6 +456,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155116}
   m_IsPrefabParent: 1
+--- !u!114 &114174143713825724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532d10ace4766e940ba3dbef59479bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114551183256922540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,5 +476,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0202305939a64ca488c979dc33944368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RadarView: {fileID: 114746198601434042}
+  TurretView: {fileID: 114174143713825724}
+  CannonView: {fileID: 11415414}
+--- !u!114 &114746198601434042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af33dae3615539e479694afdcde76868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

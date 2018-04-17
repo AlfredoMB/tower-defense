@@ -9,11 +9,15 @@ namespace AlfredoMB.Game.Turret
     {
         public CannonModelScriptableObject CannonModelScriptableObject;
 
-        public TurretModel TurretModel;
+        public float TurnSpeed;
 
         public TurretModel ToModel()
         {
-            return new TurretModel(TurretModel);
+            return new TurretModel()
+            {
+                TurnSpeed = TurnSpeed,
+                Cannon = CannonModelScriptableObject.ToModel()                
+            };
         }
     }
 }

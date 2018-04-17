@@ -7,7 +7,6 @@ using AlfredoMB.Game.Tower;
 using AlfredoMB.Stage;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AlfredoMB.Builder.Tests
@@ -73,10 +72,7 @@ namespace AlfredoMB.Builder.Tests
                 {
                     BuilderModel = new BuilderModel()
                     {
-                        AvailableTowers = new List<TowerModel>()
-                        {
-                            new TowerModel()
-                        }
+                        AvailableTower = new TowerModel()
                     }
                 }
             };
@@ -88,7 +84,7 @@ namespace AlfredoMB.Builder.Tests
             var builderController = new BuilderController();
 
             Assert.That(commandController.AddedListener, Is.Not.Null);
-            Assert.That(stageController.CurrentState.BuilderModel.SelectedTower, Is.Not.Null);
+            Assert.That(stageController.CurrentState.BuilderModel.AvailableTower, Is.Not.Null);
             
             builderController.Dispose();
             Assert.That(commandController.AddedListener, Is.Null);
@@ -105,21 +101,14 @@ namespace AlfredoMB.Builder.Tests
                 {
                     BuilderModel = new BuilderModel()
                     {
-                        AvailableTowers = new List<TowerModel>()
-                        {
-                            towerModel
-                        }
+                        AvailableTower = towerModel
                     },
-                    BoardModel = new BoardModel()
+                    BoardModel = new BoardModel(10, 10)
                     {
-                        TileSize = 1,
-                        XTiles = 10,
-                        YTiles = 10
+                        TileSize = 1
                     }
                 }
             };
-
-            stageController.CurrentState.BoardModel.Initialize();
 
             SimpleDI.Reset();
             SimpleDI.Register<ICommandController>(commandController);

@@ -11,5 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075c84a9813a990468b458a606dde90c, type: 3}
   m_Name: BuilderModel01
   m_EditorClassIdentifier: 
-  Towers:
-  - {fileID: 11400000, guid: 5b56de774f5bf59469d4bbc0ba231382, type: 2}
+  Tower: {fileID: 11400000, guid: 5b56de774f5bf59469d4bbc0ba231382, type: 2}

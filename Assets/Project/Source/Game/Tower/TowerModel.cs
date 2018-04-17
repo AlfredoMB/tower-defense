@@ -1,4 +1,5 @@
 ﻿using AlfredoMB.Game.Builder;
+using AlfredoMB.Game.Radar;
 using AlfredoMB.Game.Turret;
 using AlfredoMB.MVC;
 using System;
@@ -12,19 +13,26 @@ namespace AlfredoMB.Game.Tower
 		public int Cost;
 		public string Name;
 
-        public TurretModel Turret;
+        public TurretModel Turret { get; set; }
+        public RadarModel Radar { get; set; }
 
         public TilePosition TilePosition { get; private set; }
 
         private Dictionary<object, int> _cost;
 
+        private TowerModel _originalModel;
+
         public TowerModel()
         { }
 
-        public TowerModel(TowerModel towerModel)
+        public TowerModel(TowerModel originalModel)
         {
-            Cost = towerModel.Cost;
-            Name = towerModel.Name;
+            _originalModel = originalModel;
+
+            Cost = originalModel.Cost;
+            Name = originalModel.Name;
+            Turret = originalModel.Turret;
+            Radar = originalModel.Radar;
         }
 
         public Dictionary<object, int> GetCost()

@@ -1,4 +1,5 @@
-﻿using AlfredoMB.Game.Turret;
+﻿using AlfredoMB.Game.Radar;
+using AlfredoMB.Game.Turret;
 using AlfredoMB.MVC;
 using UnityEngine;
 
@@ -8,13 +9,20 @@ namespace AlfredoMB.Game.Tower
     public class TowerModelScriptableObject : ScriptableObject, ISerializedModel<TowerModel>
     {
         public TurretModelScriptableObject Turret;
+        public RadarModelScriptableObject Radar;
 
-        public TowerModel TowerModel;
+        public int Cost;
+        public string Name;
 
         public TowerModel ToModel()
         {
-            TowerModel.Turret = Turret.ToModel();
-            return new TowerModel(TowerModel);
+            return new TowerModel()
+            {
+                Cost = Cost,
+                Name = Name,
+                Turret = Turret.ToModel(),
+                Radar = Radar.ToModel()
+            };
         }
     }
 }

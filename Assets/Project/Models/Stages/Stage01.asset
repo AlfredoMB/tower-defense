@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:AlfredoMB.Stage:StageModelScriptableObject
   BoardModelScriptableObject: {fileID: 11400000, guid: 2055da5ccc38af84cbe3927e5743944b,
     type: 2}
-  BuilderModelScriptableObject: {fileID: 11400000, guid: 29988fc1212bdf24ea3b4b051865cc74,
+  BuilderModelScriptableObject: {fileID: 11400000, guid: 94b50e8a00f97d248b2dade01e650527,
     type: 2}
   StageModel:
     Lives: 3

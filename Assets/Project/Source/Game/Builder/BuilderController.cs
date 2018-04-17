@@ -21,7 +21,6 @@ namespace AlfredoMB.Game.Builder
             _commandController.AddListener<BuildTowerCommand>(OnBuildTowerCommand);
 
             _stage = SimpleDI.Get<IStageController>();
-            _stage.CurrentState.BuilderModel.SelectTower(0);
         }
 
         public void Dispose()

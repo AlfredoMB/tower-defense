@@ -42,7 +42,7 @@ namespace AlfredoMB.Game.Builder
         private void OnMouseUpAsButton()
         {
             _commandController.AddCommand(
-                new BuildTowerCommand(GetBuildPosition(), _stageController.CurrentState.BuilderModel.SelectedTower));
+                new BuildTowerCommand(GetBuildPosition(), _stageController.CurrentState.BuilderModel.AvailableTower));
         }
 
         private Vector3 GetBuildPosition()

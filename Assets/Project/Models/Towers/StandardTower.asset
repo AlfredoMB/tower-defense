@@ -8,9 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93a9c9c938e0fe440bbcb07c216df465, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a640dfa49c20eb4abdeefe60cfff208, type: 3}
   m_Name: StandardTower
   m_EditorClassIdentifier: 
-  Turret: {fileID: 11400000, guid: afc0ecce38403054a94d2a4a56b43a85, type: 2}
-  Cost: 50
-  Name: Standard
+  Turret: {fileID: 11400000, guid: e550c3563072b604ab2b1af3290a4cfc, type: 2}
+  Radar: {fileID: 11400000, guid: a16cab8283f7e3c4cad621b94f6b88f7, type: 2}
+  Cost: 10
+  Name: StandardTower

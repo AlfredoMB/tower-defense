@@ -1,6 +1,5 @@
 ﻿using AlfredoMB.Game.Tower;
 using AlfredoMB.MVC;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AlfredoMB.Game.Builder
@@ -8,18 +7,14 @@ namespace AlfredoMB.Game.Builder
     [CreateAssetMenu]
 	public class BuilderModelScriptableObject : ScriptableObject, ISerializedModel<BuilderModel>
     {
-        public List<TowerModelScriptableObject> Towers;
-
-        public BuilderModel BuilderModel;
+        public TowerModelScriptableObject Tower;
 
         public BuilderModel ToModel()
         {
-            foreach(var tower in Towers)
+            return new BuilderModel()
             {
-                BuilderModel.AvailableTowers.Add(tower.ToModel());
-            }
-
-            return new BuilderModel(BuilderModel);
+                AvailableTower = Tower.ToModel()
+            };
         }
     }
 }

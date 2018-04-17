@@ -11,32 +11,11 @@ namespace AlfredoMB.Board.Tests
         [Test]
         public void ConstructorTest()
         {
-            var boardModel = new BoardModel()
+            var boardModel = new BoardModel(10, 10)
             {
-                TileSize = 1,
-                XTiles = 10,
-                YTiles = 10
+                TileSize = 1
             };
-
-            var newBoardModel = new BoardModel(boardModel);
-
-            Assert.That(newBoardModel.TileSize, Is.EqualTo(boardModel.TileSize));
-            Assert.That(newBoardModel.XTiles, Is.EqualTo(boardModel.XTiles));
-            Assert.That(newBoardModel.YTiles, Is.EqualTo(boardModel.YTiles));
-        }
-
-        [Test]
-        public void InitializeTest()
-        {
-            var boardModel = new BoardModel()
-            {
-                TileSize = 1,
-                XTiles = 10,
-                YTiles = 10
-            };
-
-            boardModel.Initialize();
-
+            
             Assert.That(boardModel.Towers, Is.Not.Null);
             Assert.That(boardModel.OccupiedTiles, Is.Not.Null);
         }
@@ -44,13 +23,10 @@ namespace AlfredoMB.Board.Tests
         [Test]
         public void BuildTest()
         {
-            var boardModel = new BoardModel()
+            var boardModel = new BoardModel(10, 10)
             {
-                TileSize = 1,
-                XTiles = 10,
-                YTiles = 10
+                TileSize = 1
             };
-            boardModel.Initialize();
 
             bool wasOnUpdatedCalled = false;
             boardModel.OnUpdated += () =>

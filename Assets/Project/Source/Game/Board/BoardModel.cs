@@ -10,44 +10,33 @@ namespace AlfredoMB.Game.Board
     [Serializable]
     public class BoardModel : ObservableModel
     {
-        public float TileSize = 4f;
+        public float TileSize;
         public int XTiles;
         public int YTiles;
 
         public bool[,] OccupiedTiles { get; private set; }
-        public List<TowerModel> Towers { get; private set; }
+        public List<TowerModel> Towers = new List<TowerModel>();
 
-        public BoardModel()
-        { }
-        
-        public BoardModel(BoardModel reference)
+        public BoardModel(int xTiles, int yTiles)
         {
-            TileSize = reference.TileSize;
-            XTiles = reference.XTiles;
-            YTiles = reference.YTiles;
-            Initialize();
-        }
-
-        public void Initialize()
-        {
-            OccupiedTiles = new bool[XTiles, YTiles];
-            Towers = new List<TowerModel>();
+            XTiles = xTiles;
+            YTiles = yTiles;
+            OccupiedTiles = new bool[xTiles, yTiles];
         }
 
         public void Build(TilePosition tilePosition, TowerModel tower)
         {
-            tower.SetTilePosition(tilePosition);
-            Towers.Add(tower);
+            var newTower = new TowerModel(tower);
+
+            newTower.SetTilePosition(tilePosition);
+            Towers.Add(newTower);
 
             OccupyTile(tilePosition.TileNE);
             OccupyTile(tilePosition.TileSE);
             OccupyTile(tilePosition.TileNW);
             OccupyTile(tilePosition.TileSW);
 
-            if (OnUpdated != null)
-            {
-                OnUpdated();
-            }
+            NotifyUpdate();
         }
 
         private void OccupyTile(Vector3 tilePosition)

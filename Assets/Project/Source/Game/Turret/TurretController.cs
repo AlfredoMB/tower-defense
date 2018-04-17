@@ -1,59 +1,58 @@
 ﻿using AlfredoMB.Game.Cannon;
+using AlfredoMB.Game.Radar;
 using AlfredoMB.Game.Ship;
 using AlfredoMB.MVC;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AlfredoMB.Game.Turret
 {
-    public class TurretController : MonoBehaviour, IController
+    public class TurretController : IController
     {
-		public TurretModel Model { get; set; }
-		public TurretView View;
+		private TurretModel _model;
+        private RadarModel _radarModel;
+        private Transform _viewTransform;
 
-		public CannonController Cannon;
+        private CannonController _cannon;
 
-		private List<ShipView> _enemyQueue;
+        private const float _shootingAngle = 5f;
 
-
-		private void Start()
+        public TurretController(TurretModel model, RadarModel radarModel, Transform viewTransform, CannonView cannonView)
         {
-			View.Model = Model;
-			View.Controller = this;
+            _model = model;
+            _radarModel = radarModel;
+            _viewTransform = viewTransform;
 
-			Cannon.Model = Model.Cannon;
-
-			_enemyQueue = new List<ShipView> ();
-		}
-
-		public void AddEnemy(ShipView ship)
+            _cannon = new CannonController(_model.Cannon, cannonView);
+        }
+        
+		public void Update()
         {
-			_enemyQueue.Add (ship);
-		}
-
-		public void RemoveEnemy(ShipView ship)
-        {
-			_enemyQueue.Remove (ship);
-		}
-
-		private void Update()
-        {
-			if (_enemyQueue != null && _enemyQueue.Count > 0)
+            var enemyQueue = _radarModel.EnemiesOnRadar;
+			if (enemyQueue != null && enemyQueue.Count > 0)
             {
-				ShipView currentEnemy = _enemyQueue [0];
-				Vector3 toTargetVector = currentEnemy.transform.position - transform.position;
+				ShipView currentEnemy = enemyQueue[0];
 
-				Quaternion newRotation = Quaternion.Lerp (transform.rotation,Quaternion.LookRotation(toTargetVector), Time.deltaTime * Model.TurnSpeed);
+                // rotate towards enemy
+				Vector3 toTargetVector = currentEnemy.transform.position - _viewTransform.position;
 
-				if (Quaternion.Angle (transform.rotation, newRotation) < 5f)
+				Quaternion newRotation = Quaternion.Lerp(_viewTransform.rotation, 
+                    Quaternion.LookRotation(toTargetVector), 
+                    Time.deltaTime * _model.TurnSpeed);
+                
+                _viewTransform.rotation = newRotation;
+
+                // if on shooting angle,
+                if (Quaternion.Angle(_viewTransform.rotation, newRotation) < _shootingAngle)
                 {
-					Cannon.Fire (toTargetVector);
-				}
+                    // shoot
+                    _cannon.Fire(toTargetVector);
+                }
 
-				transform.rotation = newRotation;
-
-				_enemyQueue.RemoveAll (item => item == null || !item.isActiveAndEnabled);
+                // remove dead enemies?
+                enemyQueue.RemoveAll (item => item == null || !item.isActiveAndEnabled);
 			}
+
+            _cannon.Update();
 		}
 	}
 }

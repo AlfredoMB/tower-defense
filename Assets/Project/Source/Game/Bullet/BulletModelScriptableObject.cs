@@ -1,7 +1,21 @@
-﻿namespace AlfredoMB.Game.Bullet
+﻿using AlfredoMB.MVC;
+using UnityEngine;
+
+namespace AlfredoMB.Game.Bullet
 {
-    public class BulletModelScriptableObject
+    [CreateAssetMenu]
+    public class BulletModelScriptableObject : ScriptableObject, ISerializedModel<BulletModel>
     {
-        public BulletModel BulletModel;
+        public float Damage;
+        public float Mass;
+
+        public BulletModel ToModel()
+        {
+            return new BulletModel()
+            {
+                Damage = Damage,
+                Mass = Mass
+            };
+        }
     }
 }

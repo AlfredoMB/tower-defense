@@ -50,7 +50,7 @@ namespace AlfredoMB.Game.Board
             GameObject newTower = PrefabPoolController.GetInstance(towerPrefab.gameObject);
             newTower.transform.position = tower.TilePosition.WorldPosition;
             var towerView = newTower.GetComponent<TowerView>();
-            towerView.Model = tower;
+            towerView.SetModel(tower);
             _instantiatedTowers.Add(towerView);
         }
 
