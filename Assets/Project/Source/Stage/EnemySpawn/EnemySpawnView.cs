@@ -1,4 +1,5 @@
-﻿using AlfredoMB.MVC;
+﻿using AlfredoMB.Game.Ship;
+using AlfredoMB.MVC;
 using AlfredoMB.PrefabPool;
 using AlfredoMB.Ship;
 using UnityEngine;

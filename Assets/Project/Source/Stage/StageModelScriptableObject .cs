@@ -1,5 +1,5 @@
-﻿using AlfredoMB.Board;
-using AlfredoMB.Builder;
+﻿using AlfredoMB.Game.Board;
+using AlfredoMB.Game.Builder;
 using AlfredoMB.MVC;
 using UnityEngine;
 

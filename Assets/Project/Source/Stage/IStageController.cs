@@ -1,5 +1,5 @@
-﻿using AlfredoMB.MVC;
-using AlfredoMB.Ship;
+﻿using AlfredoMB.Game.Ship;
+using AlfredoMB.MVC;
 
 namespace AlfredoMB.Stage
 {

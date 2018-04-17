@@ -1,8 +1,8 @@
-﻿using AlfredoMB.Builder;
-using AlfredoMB.Command;
+﻿using AlfredoMB.Command;
 using AlfredoMB.DI;
 using AlfredoMB.DI.Decoupling;
 using AlfredoMB.DI.Decoupling.UnityImplementations;
+using AlfredoMB.Game.Builder;
 using AlfredoMB.Stage;
 using UnityEngine;
 

@@ -1,4 +1,4 @@
-﻿using AlfredoMB.Ship;
+﻿using AlfredoMB.Game.Ship;
 
 namespace AlfredoMB.Stage
 {
